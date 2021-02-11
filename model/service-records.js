@@ -11,12 +11,9 @@ const serviceRecords = new Schema({
       ref:'Vehicle'
   },
   serviceCategory:String,
-  date:{
+  serviceDate:{
     type:Date,
     default:Date.now()
-  },
-  status:{
-    type:String
   }
 });
 

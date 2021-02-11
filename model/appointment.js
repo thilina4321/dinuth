@@ -11,14 +11,10 @@ const appointmentSchema = new Schema({
     type:Schema.Types.ObjectId,
     ref:'Customer'
   },
-  serviceCategory:String,
-  date:{
+  serviceId:{type:Schema.Types.ObjectId, ref:'ServiceRecord'},
+  sheduleDate:{
     type:Date,
-    default:Date.now()
-  },
-  price:{
-      type:Number
-
+    default:Date.now
   }
   
 });
