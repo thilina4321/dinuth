@@ -2,10 +2,19 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const validator = require('validator')
 
 const customerSchema = new Schema({
   email: {
     type: String,
+    unique:true,
+    required:true,
+    validate(value) {
+      if (!validator.isEmail(value)) {
+        throw new Error("Invalid email address");
+      }
+    },
+    
   },
   password: {
     type: String,

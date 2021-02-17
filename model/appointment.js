@@ -11,12 +11,17 @@ const appointmentSchema = new Schema({
     type:Schema.Types.ObjectId,
     ref:'Customer'
   },
-  serviceId:{type:Schema.Types.ObjectId, ref:'ServiceRecord'},
+  serviceId:{type:String},
   sheduleDate:{
     type:Date,
     default:Date.now
+  },
+  status:{
+    type:String,
+    default:"PENDING"
   }
-  
-});
+
+},{ timestamps: true }
+);
 
 module.exports = mongoose.model("Appointment", appointmentSchema);

@@ -74,11 +74,16 @@ exports.seeDailyAppointments = async (req, res) => {
 };
 
 exports.appointmentStatus = async (req, res) => {
-  const appointmentData = rea.body;
+  const {status} = req.body;
+  if(status){
+    status = "APPROVE"
+  }else{
+    status = "REJECT"
+  }
   try {
     const appointment = await Appointment.findByIdAndUpdate(
       appointmentData.id,
-      { ...appointmentData }
+      { status }
     );
     res.send({ appointment });
   } catch (error) {
