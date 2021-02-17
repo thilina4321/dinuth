@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const validator = require('validator')
-
+const uniqueValidator = require('mongoose-unique-validator')
 const customerSchema = new Schema({
   email: {
     type: String,
-    unique:true,
     required:true,
+    unique:true,
     validate(value) {
       if (!validator.isEmail(value)) {
         throw new Error("Invalid email address");
@@ -61,6 +61,7 @@ customerSchema.methods.toJSON = function () {
   return userObject;
 };
 
+customerSchema.plugin(uniqueValidator)
 customerSchema.methods.generateToken = async function () {
   const user = this;
 
@@ -75,7 +76,6 @@ customerSchema.methods.generateToken = async function () {
     return { error: error.message };
   }
 };
-
 const Customer = mongoose.model("Customer", customerSchema);
 
 module.exports = Customer;
