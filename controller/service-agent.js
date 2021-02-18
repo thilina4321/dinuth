@@ -82,7 +82,7 @@ exports.appointmentStatus = async (req, res) => {
   }
   try {
     const appointment = await Appointment.findByIdAndUpdate(
-      id,
+       id,
       { status }
     );
     res.send({ appointment });

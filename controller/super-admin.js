@@ -54,8 +54,9 @@ exports.addCustomer = async (req, res) => {
 
 
 exports.showCustomer = async (req, res) => {
+  const id = req.params.id
   try {
-    const customers = await Customer.find();
+    const customers = await Customer.findById(id);
     res.send({ customers });
   } catch (error) {
     res.status(500).send({ error: error.message });
@@ -126,6 +127,36 @@ exports.serviceAgent = async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 };
+
+exports.editServiceAgent = async (req, res) => {
+  const id = req.params.id
+  const agentData = req.body;
+  let password;
+
+  try {
+    if(agentData.id){
+       password = await bcrypt.hash(agentData.password, 8);
+
+    }
+    const agent = await ServiceAgent.findByIdAndUpdate(id, {...agentData}, {new:true, runValidators:true})
+    const saved = await agent.save();
+    res.send({ agent: saved });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
+exports.deleteServiceAgent = async (req, res) => {
+  const id = req.params.id
+  try {
+    const agent = await ServiceAgent.findByIdAndDelete(id)
+    res.send({message:'delete successfully', agent });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
+
 
 exports.showAppointment = async (req, res) => {
   try {
