@@ -62,7 +62,6 @@ customerSchema.methods.toJSON = function () {
   return userObject;
 };
 
-customerSchema.plugin(uniqueValidator)
 customerSchema.methods.generateToken = async function () {
   const user = this;
 
@@ -77,6 +76,8 @@ customerSchema.methods.generateToken = async function () {
     return { error: error.message };
   }
 };
+
+customerSchema.plugin(uniqueValidator)
 const Customer = mongoose.model("Customer", customerSchema);
 
 module.exports = Customer;

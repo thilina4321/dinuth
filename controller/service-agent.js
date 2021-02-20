@@ -26,14 +26,24 @@ exports.login = async (req, res) => {
 
 exports.createRecord = async (req, res) => {
   const recordData = req.body;
+  let date = recordData.date
   try {
-    const record = new ServiceRecord({ ...recordData });
+    const record = new ServiceRecord({ ...recordData,serviceDate: new Date(date)  });
     const saved = await record.save();
     res.send({ record: saved });
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
 };
+
+exports.showAllReports = async(req,res)=>{
+  try {
+    const reports = await ServiceRecord.find()
+    res.send({ reports})
+  } catch (error) {
+    res.status(500).send({error:error.message})
+  }
+}
 
 exports.editRecord = async (req, res) => {
   const recordData = req.body;
@@ -67,7 +77,7 @@ exports.deleteRecord = async (req, res) => {
   const id = req.params.id;
   try {
     const record = await ServiceRecord.findByIdAndDelete(id);
-    res.send({ record });
+    res.send({ record, message:'Delete record successfully' });
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
@@ -100,21 +110,4 @@ exports.appointmentStatus = async (req, res) => {
   }
 };
 
-exports.showPastAppointment = async (req, res) => {
-  try {
-    const appointments = await Appointment.find({sheduleDate:{$gt : new Date.now()}})
-    res.send({appointments})
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-  }
-};
 
-
-
-// exports.customerVehicle = async(req,res)=>{
-//     try {
-
-//     } catch (error) {
-// res.status(500).send({error:error.message})
-//     }
-// }

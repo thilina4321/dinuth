@@ -107,6 +107,18 @@ exports.editVehicle = async (req, res) => {
   }
 };
 
+exports.deleteVehicle = async (req, res) => {
+  const id = req.params.id
+  try {
+    const vehicle = await Vehicle.findByIdAndDelete(id);
+    res.send({ message: "Delete vehicle", vehicle });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
+
+
 exports.getServiceRecords = async (req, res) => {
   try {
     const records = await ServiceRecord.find();
@@ -127,6 +139,15 @@ exports.serviceAgent = async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 };
+
+exports.showAllAgents = async(req,res)=>{
+  try {
+    const agents = await ServiceAgent.find()
+    res.send({ agents})
+  } catch (error) {
+    res.status(500).send({error:error.message})
+  }
+}
 
 exports.editServiceAgent = async (req, res) => {
   const id = req.params.id

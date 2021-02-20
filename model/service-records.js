@@ -13,9 +13,8 @@ const serviceRecords = new Schema({
   serviceCategory:String,
   serviceDate:{
     type:Date,
-    default:Date.now()
   },
   amount:{type:Number}
-});
+},{timestamps:true});
 
 module.exports = mongoose.model("ServiceRecord", serviceRecords);

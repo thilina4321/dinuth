@@ -73,8 +73,8 @@ exports.editVehicle = async (req, res) => {
 exports.deleteVehicle = async (req, res) => {
   const id = req.params.id;
   try {
-    const customer = await Vehicle.findByIdAndDelete(id);
-    res.send({ customer });
+    const vehicle = await Vehicle.findByIdAndDelete(id);
+    res.send({  vehicle, message:"Vehicle deleted" });
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
@@ -92,6 +92,16 @@ exports.createAppointment = async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 };
+
+exports.showAllAppointments = async(req,res)=>{
+  const customerId = req.customer;
+  try {
+    const appointments = await Appointment.find({customerId})
+    res.send({appointments})
+  } catch (error) {
+    res.status(500).send({error:error.message})
+  }
+}
 
 exports.viewServiceRecords = async (req, res) => {
   const id = req.customer;

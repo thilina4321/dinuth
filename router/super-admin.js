@@ -14,10 +14,12 @@ router.get('/customer/:id',Auth, controller.showCustomer)
 router.post('/vehicles-add',Auth, controller.addVehicle)
 router.get('/vehicles',Auth, controller.getVehicles)
 router.patch('/vehicles/:id',Auth, controller.editVehicle)
+router.delete('/delete-vehicle/:id',Auth, controller.deleteVehicle)
 
 router.get('/records',Auth, controller.getServiceRecords)
 
 router.post('/agent',Auth, controller.serviceAgent)
+router.get('/show-agents',Auth, controller.showAllAgents)
 router.patch('/edit-agent/:id',Auth, controller.editServiceAgent)
 router.post('/delete-agent/:id',Auth, controller.deleteServiceAgent)
 

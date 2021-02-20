@@ -3,11 +3,12 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const validator = require('validator')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const agentSchema = new Schema({
   email: {
     type: String,
-    unique:String,
+    unique:true,
     required:String,
     validate(value) {
       if (!validator.isEmail(value)) {
@@ -21,13 +22,25 @@ const agentSchema = new Schema({
   name: {
     type: String,
   },
-  phoneNo: String,
+  phoneNo: {
+    type:Number,
+    validate(value) {
+      if (value.length != 10) {
+        throw new Error("Phone number should have only ten numbers");
+      }
+    },
+  },
+  
+  
   role:{type:String, default:'AGENT'},
   
   tokens:[
     {token:String}
   ]
 });
+
+agentSchema.plugin(uniqueValidator)
+
 
 agentSchema.statics.loginWithEmailAndPassword = async (credential) => {
   try {

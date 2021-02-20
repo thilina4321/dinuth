@@ -12,7 +12,7 @@ const appointmentSchema = new Schema({
     ref:'Customer'
   },
 
-  serviceId:{type:String},
+  serviceCategory:{type:String},
   sheduleDate:{
     type:Date,
   },
@@ -20,7 +20,8 @@ const appointmentSchema = new Schema({
     type:String,
     default:"PENDING"
   },
-  date:{type:Date}
+  date:{type:Date},
+  time:{type:String},
 }
 );
 
