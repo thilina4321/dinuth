@@ -12,7 +12,4 @@ router.get('/daily',Auth, controller.seeDailyAppointments)
 router.get('/past',Auth, controller.showPastAppointment)
 router.post('/decision',Auth, controller.appointmentStatus)
 
-
-
-
 module.exports = router

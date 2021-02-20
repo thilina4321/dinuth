@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const validator = require('validator')
 const uniqueValidator = require('mongoose-unique-validator')
+
 const customerSchema = new Schema({
   email: {
     type: String,

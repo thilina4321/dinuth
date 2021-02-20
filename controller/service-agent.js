@@ -54,6 +54,15 @@ exports.editRecord = async (req, res) => {
   }
 };
 
+exports.viewServiceRecords = async(req,res)=>{
+  try {
+    const records = await ServiceRecord.find()
+    res.send({records})
+  } catch (error) {
+    res.status(500).send({error:error.message})
+  }
+}
+
 exports.deleteRecord = async (req, res) => {
   const id = req.params.id;
   try {
