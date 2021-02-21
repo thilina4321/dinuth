@@ -84,7 +84,7 @@ exports.createAppointment = async (req, res) => {
   const appointmentData = req.body;
   const customerId = req.customer;
   try {
-    appointmentData.date = new Date(appointment.date)
+    appointmentData.date = new Date(appointmentData.date)
     const appointment = new Appointment({ ...appointmentData, customerId });
     const saved = await appointment.save();
     res.send({ appointment: saved });
