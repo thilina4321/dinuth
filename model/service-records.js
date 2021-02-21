@@ -12,7 +12,7 @@ const serviceRecords = new Schema({
   },
   serviceCategory:String,
   serviceDate:{
-    type:Date,
+    type:String,
   },
   amount:{type:Number}
 },{timestamps:true});
