@@ -66,7 +66,7 @@ customerSchema.methods.generateToken = async function () {
   const user = this;
 
   try {
-    const token = jwt.sign({ id: user._id }, "dinuth", {
+    const token = jwt.sign({ id: user._id }, process.env.SECRET, {
       expiresIn: "1h",
     });
     user.tokens = user.tokens.concat({ token });

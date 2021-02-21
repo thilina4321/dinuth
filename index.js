@@ -15,19 +15,18 @@ app.use('/admin', admin)
 app.use('/agent', agent)
 app.use('/customer', customer)
 
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
   mongoose
-    .connect("mongodb://127.0.0.1:27017/hasantha", {
+    .connect(process.env.DATABASE, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
     .then(() => {
-      console.log("connect ", port);
+      console.log("connect ", process.env.PORT);
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error); 
     });
 });
 
 
-// apointment approve , reject
