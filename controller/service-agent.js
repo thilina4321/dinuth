@@ -93,7 +93,7 @@ exports.seeDailyAppointments = async (req, res) => {
 };
 
 exports.appointmentStatus = async (req, res) => {
-  const {status, id} = req.body;
+  let {status, id} = req.body;
   if(status){
     status = "APPROVE"
   }else{

@@ -23,7 +23,7 @@ const agentSchema = new Schema({
     type: String,
   },
   phoneNo: {
-    type:Number,
+    type:String,
     validate(value) {
       if (value.length != 10) {
         throw new Error("Phone number should have only ten numbers");
