@@ -10,6 +10,7 @@ const port = 3000;
 
 app.use(express.json());
 app.use(cors())
+require("dotenv").config()
 
 app.use('/admin', admin)
 app.use('/agent', agent)
